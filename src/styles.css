@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    width: clamp(300px, 25%, 400px);
+    background-color: lavenderblush;
+    border-right: 2px solid lightgrey;
+}
+
+.content {
+    flex: 1;
+}
+
+.header-cont {
+    display: flex;
+    justify-content: space-between;
+    height: 5%;
+    width: 80%;
+}
+
+.projects-cont {
+    flex: 1;
+}
