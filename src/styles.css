@@ -9,11 +9,14 @@ body {
     display: flex;
     flex-direction: column;
     width: clamp(300px, 25%, 400px);
-    background-color: lavenderblush;
+    background-color: white;
     border-right: 2px solid lightgrey;
 }
 
 .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     flex: 1;
 }
 
@@ -25,19 +28,79 @@ body {
 }
 
 .projects-cont {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     flex: 1;
+}
+
+.projects-cont > div {
+    margin-left: 10px;
+}
+
+.header {
+    font-size: 2.5em;
+    margin-left: 10px;
 }
 
 .project {
     display: flex;
     justify-content: space-between;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    width: 85%;
+}
+
+.project > P {
+    margin-left: 10px;
+}
+
+.input-div {
+    display: flex;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.projects-form {
+    display: flex;
+    justify-content: space-between;
+    width: 85%;
+}
+
+.project-input {
+    border: none;
+    background-color: #e3e3e3;
+    border-radius: 5px;
+    height: 25px;
+    width: 85%
+}
+
+.add-project {
+    background-color: royalblue;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    width: 10%;
+}
+
+.add-project:hover {
+    cursor: pointer;
 }
 
 .project:hover {
-    cursor: pointer;
-    background-color: #CCC0C4;
+    background-color: lightgray;
+    box-shadow: none;
 }
 
 .delete-icon:hover {
     background-color: red;
+    cursor: pointer;
 }
+
+/* Content */
+.project-cont {
+    height: 100%;
+    width: 90%;
+    border: 1px solid black;
+}
+

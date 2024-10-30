@@ -7,7 +7,7 @@ export class Project {
     }
 }
 
-export class UserController {
+export class SidebarController {
     // array of projects
     static arrayProjects = [];
 
@@ -16,7 +16,7 @@ export class UserController {
     // append new object to array
     static createObject(name) {
         const newProject = new Project(name, []);
-        UserController.arrayProjects.push(newProject);
+        SidebarController.arrayProjects.push(newProject);
     }
 
     // get and return new input each time function is called
@@ -28,16 +28,22 @@ export class UserController {
     // add event listener method
     static addListener() {
         const addBtn = document.querySelector(".add-project");
-        addBtn.addEventListener("click", UserController.appendProject);
+        addBtn.addEventListener("click", SidebarController.appendProject);
     }
 
     // push to DOM and array
     static appendProject() {
         // get user input
-        let newProjName = UserController.getUserInput();
+        let newProjName = SidebarController.getUserInput();
+        const textBox = document.querySelector(".project-input");
 
-        // create and add append to both array and sidebar
-        UserController.createObject(newProjName);
-        Sidebar.addProject(newProjName);
+        // Only add if it isn't an empty string
+        if (newProjName !== "") {
+            SidebarController.createObject(newProjName);
+            Sidebar.addProject(newProjName);
+        };
+        textBox.value = "";
     };
+
+    
 }
