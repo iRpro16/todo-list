@@ -1,3 +1,4 @@
+import deleteIcon from "/src/assets/svgs/delete.svg";
 export class Sidebar {
     static loadSidebar() {
         // fetch sidebar and append elements to sidebar
@@ -12,17 +13,27 @@ export class Sidebar {
         const inputDiv = document.createElement("div");
         inputDiv.classList.add("input-div");
 
-        // textbox
-        const projNameInput = document.createElement("INPUT");
-        projNameInput.setAttribute("type", "text");
+        // form
+        const nameForm = document.createElement("form");
+        nameForm.classList.add("projects-form");
+        // prevent page refresh on submit
+        nameForm.setAttribute("onSubmit", "return false");
 
-        // add project button
-        const addProjBtn = document.createElement("button");
-        addProjBtn.classList.add("add-project");
-        addProjBtn.innerText = "+";
+        // input
+        const projectTextInput = document.createElement("input");
+        projectTextInput.classList.add('project-input');
+        projectTextInput.setAttribute("type", "text");
+        projectTextInput.setAttribute("placeholder", "Add a project...");
 
-        // append input and button to input div
-        inputDiv.append(projNameInput, addProjBtn);
+        const s = document.createElement("button");
+        s.innerHTML = "+";
+        s.classList.add("add-project");
+        s.setAttribute("type", "submit");
+
+        // append to form
+        nameForm.appendChild(projectTextInput);
+        nameForm.appendChild(s);
+        inputDiv.append(nameForm);
 
         // projects container
         const projectsCont = document.createElement("div");
@@ -32,13 +43,27 @@ export class Sidebar {
     };
 
     static addProject(projectName) {
-        // everytime this function is called, create element and append to sidebar
-        const project = document.createElement("p");
-        project.innerText = projectName;
+        // everytime this function is called, create element and append to sidebar\
+        // create project div
+        const projectDiv = document.createElement("div");
+        projectDiv.classList.add("project");
+        projectDiv.id = projectName;
+
+        // create title and svg
+        const projectTitle = document.createElement("p");
+        projectTitle.textContent = projectName;
+        // svg
+        const deleteSvg = document.createElement("img");
+        deleteSvg.src = deleteIcon;
+        deleteSvg.classList.add('delete-icon');
+        deleteSvg.style.width = "25px";
+
+        // append
+        projectDiv.append(projectTitle, deleteSvg);
 
         // get projectsCont
         const getProjectsCont = document.querySelector(".projects-cont");
-        getProjectsCont.appendChild(project);
+        getProjectsCont.appendChild(projectDiv);
     };
 };
 

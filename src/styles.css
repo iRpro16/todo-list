@@ -27,3 +27,17 @@ body {
 .projects-cont {
     flex: 1;
 }
+
+.project {
+    display: flex;
+    justify-content: space-between;
+}
+
+.project:hover {
+    cursor: pointer;
+    background-color: #CCC0C4;
+}
+
+.delete-icon:hover {
+    background-color: red;
+}
