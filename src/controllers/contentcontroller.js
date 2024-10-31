@@ -1,3 +1,5 @@
+import { SidebarController } from "./sidebarcontroller";
+import { Content } from "../components/content";
 class Tasks {
     constructor(title, description, dueDate, priority) {
         this.title = title;
@@ -8,7 +10,26 @@ class Tasks {
 }
 
 export class ContentController {
-    
+    // add event listeners 
+    static addProjectListeners() {
+        const projects = document.querySelectorAll(".project");
+        projects.forEach(project => {
+            project.addEventListener("click", ContentController.appendProject);
+        });
+    }
+
+    static appendProject(e) {
+        // ID and get array
+        const projectId = e.target.id;
+        const projectObjects = SidebarController.arrayProjects;
+
+        // Loop and append
+        projectObjects.forEach(project => {
+            if (project.name === projectId) {
+                Content.createContent(project);
+            };
+        });
+    };
 }
 
 // the creating of the Tasks class will depend solely

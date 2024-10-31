@@ -1,4 +1,5 @@
 import { SidebarController } from "../controllers/sidebarcontroller";
+import { compareAsc, format } from "date-fns";
 
 
 export class Content {
@@ -22,18 +23,81 @@ export class Content {
         content.append(projectCont);  
     };
 
-    static createContent(projectName, tasks) {
+    static createContent(projectObject) {
         // get project container
         const projectCont = document.querySelector(".project-cont");
+        projectCont.innerHTML = "";
 
-        // create a div for tasks
-        // for each task in tasks
-        // call createTask
+        // create heading
+        const projectHeading = document.createElement("h1");
+        projectHeading.classList.add(projectObject.name);
+        projectHeading.innerText = projectObject.name;
+        // append
+        projectCont.append(projectHeading);
+
+        // get current date it was created
+        const currentDay = format(new Date(), "MM/dd/yyyy");
+        const displayDate = document.createElement('p');
+        displayDate.innerText = `Created: ${currentDay}`;
+        // append
+        projectCont.append(displayDate);
+
+        // create tasks div
+        const tasksDiv = document.createElement("div");
+        tasksDiv.classList.add("tasks-div");
+        // append
+        projectCont.append(tasksDiv);
+
+        // style each task in tasks
+        projectObject.tasks.forEach(task => {
+            Content.createTask(task.title, task.description, task.dueDate, task.priority);
+        });
     }
 
     static createTask(title, description, dueDate, priority) {
-        // This will create the UI for the tasks
-        // Based on title, description, dueDate, priority
+        // get tasks list
+        const tasksList = document.querySelector(".tasks-div");
+        // create elements
+        // title
+        const taskTitle = document.createElement("h2");
+        taskTitle.innerText = title;
+        // description
+        const taskDescription = document.createElement("p");
+        taskDescription.innerText = description;
+        // due
+        const taskDue = document.createElement("p");
+        taskDue.innerText = `Due: ${dueDate}`;
+        // priority
+        console.log(priority);
 
+        // task div
+        const taskCont = document.createElement("div");
+        taskCont.classList.add('task');
+
+        // checkbox 
+        const checkbox = document.createElement("input");
+        checkbox.setAttribute("type", "checkbox");
+        // append
+        taskCont.append(checkbox);
+
+        // other elements
+        const elementsDiv = document.createElement("div");
+        elementsDiv.classList.add("elements-div");
+
+        // left side
+        const leftTask = document.createElement("div")
+        leftTask.classList.add("left-side");
+        leftTask.append(taskTitle, taskDescription);
+
+        // right side
+        const rightTask = document.createElement("div");
+        rightTask.classList.add("right-side");
+        rightTask.append(taskDue);
+        // append
+        elementsDiv.append(leftTask, rightTask);
+
+        // append all
+        taskCont.append(elementsDiv);
+        tasksList.append(taskCont);
     }
 }

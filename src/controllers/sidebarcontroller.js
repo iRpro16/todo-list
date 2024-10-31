@@ -1,4 +1,5 @@
 import { Sidebar } from "../components/sidebar";
+import { ContentController } from "./contentcontroller";
 
 export class Project {
     constructor(name, tasks){
@@ -6,6 +7,21 @@ export class Project {
         this.tasks = tasks;
     }
 }
+
+const tasks = [
+    {
+        title: "Homework",
+        description: "complete lecture notes",
+        dueDate: "01/11/2024",
+        priority: true
+    },
+    {
+        title: "Gym",
+        description: "leg day",
+        dueDate: "01/11/2024",
+        priority: false
+    }
+]
 
 export class SidebarController {
     // array of projects
@@ -15,7 +31,7 @@ export class SidebarController {
     // array for tasks (which accepts strings)
     // append new object to array
     static createObject(name) {
-        const newProject = new Project(name, []);
+        const newProject = new Project(name, tasks);
         SidebarController.arrayProjects.push(newProject);
     }
 
@@ -37,13 +53,15 @@ export class SidebarController {
         let newProjName = SidebarController.getUserInput();
         const textBox = document.querySelector(".project-input");
 
-        // Only add if it isn't an empty string
+        // create new object
+        // append to sidebar
+        // to each project, add event listener
         if (newProjName !== "") {
             SidebarController.createObject(newProjName);
             Sidebar.addProject(newProjName);
+            ContentController.addProjectListeners();
+            console.log(SidebarController.arrayProjects);
         };
         textBox.value = "";
     };
-
-    
 }
