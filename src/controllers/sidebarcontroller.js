@@ -5,23 +5,8 @@ export class Project {
     constructor(name, tasks){
         this.name = name;
         this.tasks = tasks;
-    }
+    };
 }
-
-const tasks = [
-    {
-        title: "Homework",
-        description: "complete lecture notes",
-        dueDate: "01/11/2024",
-        priority: true
-    },
-    {
-        title: "Gym",
-        description: "leg day",
-        dueDate: "01/11/2024",
-        priority: false
-    }
-]
 
 export class SidebarController {
     // array of projects
@@ -31,7 +16,7 @@ export class SidebarController {
     // array for tasks (which accepts strings)
     // append new object to array
     static createObject(name) {
-        const newProject = new Project(name, tasks);
+        const newProject = new Project(name, []);
         SidebarController.arrayProjects.push(newProject);
     }
 

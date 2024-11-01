@@ -1,6 +1,6 @@
 import { SidebarController } from "./sidebarcontroller";
 import { Content } from "../components/content";
-class Tasks {
+class Task {
     constructor(title, description, dueDate, priority) {
         this.title = title;
         this.description = description;
@@ -12,22 +12,62 @@ class Tasks {
 export class ContentController {
     // add event listeners 
     static addProjectListeners() {
+        // select all projects with "project" class
         const projects = document.querySelectorAll(".project");
         projects.forEach(project => {
+            // add event listener to each project 
             project.addEventListener("click", ContentController.appendProject);
         });
     }
 
     static appendProject(e) {
-        // ID and get array
+        // ID, array, projectCont
         const projectId = e.target.id;
         const projectObjects = SidebarController.arrayProjects;
+        const projectCont = document.querySelector(".projects-cont");
 
-        // Loop and append
+        // loop and append
         projectObjects.forEach(project => {
             if (project.name === projectId) {
+                // call createContent with object which appends to content
                 Content.createContent(project);
             };
+        });
+        // add listener to add task button
+        ContentController.addTaskListener();
+    };
+
+    static appendTask() {
+        // get values
+        const title = document.getElementById("title").value;
+        const description = document.getElementById("description").value;
+        const dueDate = document.getElementById("due-date").value;
+        const priority = document.querySelectorAll(".priority").value;
+
+        // create object
+        // select object and append this object, once done get project tasks and append
+        const task = new Task(title, description, dueDate, priority);
+    }
+
+    static addTaskListener() {
+        // select elements
+        const addTaskBtn = document.querySelector(".add-task");
+        const modal = document.getElementById("modal");
+
+        // add event listener for modal
+        addTaskBtn.addEventListener("click", () => modal.showModal());
+        ContentController.confirmBtn(modal);
+    }
+
+    static confirmBtn(modal) {
+        // get confirm button
+        const confirm = document.getElementById("confirm");
+
+        // add event listener and call
+        confirm.addEventListener("click", (e) => {
+            e.preventDefault();
+            ContentController.appendTask();
+            modal.close();
         });
     };
 }

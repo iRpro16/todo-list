@@ -35,12 +35,24 @@ export class Content {
         // append
         projectCont.append(projectHeading);
 
+        // create time and add
+        const subHeading = document.createElement("div");
+        subHeading.classList.add("subheading");
+
         // get current date it was created
         const currentDay = format(new Date(), "MM/dd/yyyy");
         const displayDate = document.createElement('p');
         displayDate.innerText = `Created: ${currentDay}`;
         // append
-        projectCont.append(displayDate);
+        subHeading.append(displayDate);
+
+        // add task button
+        const addTask = document.createElement("button");
+        addTask.innerText = "add task";
+        addTask.classList.add("add-task");
+        //append
+        subHeading.append(addTask);
+        projectCont.append(subHeading);
 
         // create tasks div
         const tasksDiv = document.createElement("div");
@@ -57,6 +69,7 @@ export class Content {
     static createTask(title, description, dueDate, priority) {
         // get tasks list
         const tasksList = document.querySelector(".tasks-div");
+
         // create elements
         // title
         const taskTitle = document.createElement("h2");
@@ -68,7 +81,7 @@ export class Content {
         const taskDue = document.createElement("p");
         taskDue.innerText = `Due: ${dueDate}`;
         // priority
-        console.log(priority);
+        priority = null;
 
         // task div
         const taskCont = document.createElement("div");
@@ -101,3 +114,12 @@ export class Content {
         tasksList.append(taskCont);
     }
 }
+
+// create form modal on add task button click
+// once form modal is done, submit it
+// then on modal submit we store values
+// with those values,
+// we create a new object
+// once created we get title id and iterate through array
+// if true, we append new object to object.tasks
+// we then call the createTask() method with new values
