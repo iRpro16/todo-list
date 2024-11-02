@@ -3,10 +3,16 @@ import { Sidebar } from "./components/sidebar";
 import { Content } from "./components/content";
 import { SidebarController } from "./controllers/sidebarcontroller";
 import { ContentController } from "./controllers/contentcontroller";
+import { ModalController } from "./controllers/modalcontroller";
 
 const loadPage = (function() {
-    // handlers
+    // load the page
     Sidebar.loadSidebar();
     Content.loadContent();
-    SidebarController.addListener();
+
+    // initialize event listeners
+    SidebarController.init();
+    ContentController.init();
+    ModalController.init();
+
 })()

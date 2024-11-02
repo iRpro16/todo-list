@@ -1,5 +1,5 @@
 import { Sidebar } from "../components/sidebar";
-import { ContentController } from "./contentcontroller";
+import { Content } from "../components/content";
 
 export class Project {
     constructor(name, tasks){
@@ -12,9 +12,41 @@ export class SidebarController {
     // array of projects
     static arrayProjects = [];
 
-    // create object with name and empty
-    // array for tasks (which accepts strings)
-    // append new object to array
+    // initialize event listner
+    static init() {
+        const sidebar = document.querySelector(".sidebar");
+        sidebar.addEventListener("click", SidebarController.handleSidebarClick);
+    }
+
+    // handle main listeners
+    static handleSidebarClick(e) {
+        // if classlist is "add-project"
+        if (e.target.classList.contains("add-project")) {
+            // get user input
+            const projectName = SidebarController.getUserInput();
+            if (projectName.value !== "") {
+                // create object
+                SidebarController.createObject(projectName.value);
+
+                // add prohect to DOM
+                Sidebar.addProject(projectName.value);
+
+                // clear
+                projectName.value = "";
+            }
+        };
+
+        // if classlist is project
+        if (e.target.classList.contains("project")) {
+            const projectId = e.target.id;
+            SidebarController.appendProject(projectId);
+        }
+    }
+
+    /*
+    create an object with name and empty array,
+    then push new object to array 
+    */
     static createObject(name) {
         const newProject = new Project(name, []);
         SidebarController.arrayProjects.push(newProject);
@@ -23,29 +55,20 @@ export class SidebarController {
     // get and return new input each time function is called
     static getUserInput() {
         let projectName = document.querySelector(".project-input");
-        return projectName.value;
+        return projectName;
     }
 
-    // add event listener method
-    static addListener() {
-        const addBtn = document.querySelector(".add-project");
-        addBtn.addEventListener("click", SidebarController.appendProject);
+    /*
+    fetch object array, and iterate
+    if object.name matches the clicked id
+    create content
+    */
+    static appendProject(projectId) {
+        const projectObjects = SidebarController.arrayProjects;
+        projectObjects.forEach(project => {
+            if (project.name === projectId) {
+                Content.createContent(project);
+            }
+        });
     }
-
-    // push to DOM and array
-    static appendProject() {
-        // get user input
-        let newProjName = SidebarController.getUserInput();
-        const textBox = document.querySelector(".project-input");
-
-        // create new object
-        // append to sidebar
-        // to each project, add event listener
-        if (newProjName !== "") {
-            SidebarController.createObject(newProjName);
-            Sidebar.addProject(newProjName);
-            ContentController.addProjectListeners();
-        };
-        textBox.value = "";
-    };
 }

@@ -1,6 +1,6 @@
 import { SidebarController } from "../controllers/sidebarcontroller";
 import { compareAsc, format } from "date-fns";
-
+import starIcon from "/src/assets/svgs/star.svg";
 
 export class Content {
     static loadContent() {
@@ -81,8 +81,8 @@ export class Content {
         // due
         const taskDue = document.createElement("p");
         taskDue.innerText = `Due: ${dueDate}`;
-        // priority
-        priority = null;
+        // priority and include priority
+        const taskPriority = priority;
 
         // task div
         const taskCont = document.createElement("div");
@@ -91,6 +91,7 @@ export class Content {
         // checkbox 
         const checkbox = document.createElement("input");
         checkbox.setAttribute("type", "checkbox");
+        checkbox.classList.add("checkbox");
         // append
         taskCont.append(checkbox);
 
@@ -106,6 +107,16 @@ export class Content {
         // right side
         const rightTask = document.createElement("div");
         rightTask.classList.add("right-side");
+        
+        // svg 
+        if (taskPriority === "yes") {
+            // svg
+            const starSvg = document.createElement("img");
+            starSvg.src = starIcon;
+            starSvg.classList.add('star-icon');
+            starSvg.style.width = "25px";
+            rightTask.append(starSvg);
+        }
         rightTask.append(taskDue);
         // append
         elementsDiv.append(leftTask, rightTask);
@@ -115,12 +126,3 @@ export class Content {
         tasksList.append(taskCont);
     }
 }
-
-// create form modal on add task button click
-// once form modal is done, submit it
-// then on modal submit we store values
-// with those values,
-// we create a new object
-// once created we get title id and iterate through array
-// if true, we append new object to object.tasks
-// we then call the createTask() method with new values

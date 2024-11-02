@@ -1,5 +1,6 @@
 import { SidebarController } from "./sidebarcontroller";
 import { Content } from "../components/content";
+import { ModalController } from "./modalcontroller";
 class Task {
     constructor(title, description, dueDate, priority) {
         this.title = title;
@@ -10,39 +11,33 @@ class Task {
 }
 
 export class ContentController {
-    static taskListenerAdded = false;
-    // add event listeners 
-    static addProjectListeners() {
-        // select all projects with "project" class
-        const projects = document.querySelectorAll(".project");
-        projects.forEach(project => {
-            // add event listener to each project 
-            project.addEventListener("click", ContentController.appendProject);
-        });
+
+    // initialize listeners
+    static init() {
+        const content = document.querySelector(".content");
+        content.addEventListener("click", ContentController.handleContentClick);
     }
 
-    static appendProject(e) {
-        // ID, array, projectCont
-        const projectId = e.target.id;
-        const projectObjects = SidebarController.arrayProjects;
+    // handleContentClick
+    static handleContentClick(e) {
+        // open modal
+        if (e.target.classList.contains("add-task")) {
+            ModalController.modal.showModal();
+        }
 
-        // loop and append
-        projectObjects.forEach(project => {
-            if (project.name === projectId) {
-                // call createContent with object which appends to content
-                Content.createContent(project);
-            };
-        });
-        ContentController.addTaskListener();
-    };
+        // delete if checked
+        if (e.target.classList.contains("checkbox")) {
 
+        }
+    }
+
+    // append task
     static appendTask() {
         // get values
         const title = document.getElementById("title").value;
         const description = document.getElementById("description").value;
         const dueDate = document.getElementById("due-date").value;
-        const priority = document.querySelectorAll(".priority").value;
-        const objectArray = SidebarController.arrayProjects;
+        const priority = document.querySelector("input[name = priority]:checked").value;
         const header = document.querySelector(".heading");
 
         // create object
@@ -50,7 +45,7 @@ export class ContentController {
         const task = new Task(title, description, dueDate, priority);
 
         // Get matching object
-        objectArray.forEach(object => {
+        SidebarController.arrayProjects.forEach(object => {
             if (header.id === object.name) {
                 object.tasks.push(task);
                 Content.createTask(title, description, dueDate, priority);
@@ -58,36 +53,8 @@ export class ContentController {
         });
     };
 
-    static addTaskListener() {
-        // select elements
-        const addTaskBtn = document.querySelector(".add-task");
-        const modal = document.getElementById("modal");
+    // delete task
+    static deleteTask(taskTitle) {
 
-        // add event listener for modal
-        addTaskBtn.addEventListener("click", () => {
-            modal.showModal();
-        });
-        ContentController.confirmBtn(modal);
     }
-
-    static confirmBtn(modal) {
-        // get confirm button
-        const confirm = document.getElementById("confirm");
-
-        // add event listener and call
-        confirm.replaceWith(confirm.cloneNode(true));
-        const newConfirm = document.getElementById("confirm");
-        newConfirm.addEventListener("click", (e) => {
-            e.preventDefault();
-            ContentController.appendTask();
-            modal.close();
-        });
-    };
 }
-
-// the creating of the Tasks class will depend solely
-// on the information given by the modal pop-up
-// and from there it will feed the arguments
-// for the object to be created
-// once created, it will be appended to the 'tasks' array
-// essentially the tasks array will be an array of objects
