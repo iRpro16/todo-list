@@ -45,7 +45,6 @@ export class SidebarController {
             SidebarController.createObject(newProjName);
             Sidebar.addProject(newProjName);
             ContentController.addProjectListeners();
-            console.log(SidebarController.arrayProjects);
         };
         textBox.value = "";
     };

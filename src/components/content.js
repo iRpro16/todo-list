@@ -30,7 +30,8 @@ export class Content {
 
         // create heading
         const projectHeading = document.createElement("h1");
-        projectHeading.classList.add(projectObject.name);
+        projectHeading.setAttribute("id", projectObject.name)
+        projectHeading.classList.add("heading");
         projectHeading.innerText = projectObject.name;
         // append
         projectCont.append(projectHeading);

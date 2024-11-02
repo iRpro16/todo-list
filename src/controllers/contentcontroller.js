@@ -10,6 +10,7 @@ class Task {
 }
 
 export class ContentController {
+    static taskListenerAdded = false;
     // add event listeners 
     static addProjectListeners() {
         // select all projects with "project" class
@@ -24,7 +25,6 @@ export class ContentController {
         // ID, array, projectCont
         const projectId = e.target.id;
         const projectObjects = SidebarController.arrayProjects;
-        const projectCont = document.querySelector(".projects-cont");
 
         // loop and append
         projectObjects.forEach(project => {
@@ -33,7 +33,6 @@ export class ContentController {
                 Content.createContent(project);
             };
         });
-        // add listener to add task button
         ContentController.addTaskListener();
     };
 
@@ -43,11 +42,21 @@ export class ContentController {
         const description = document.getElementById("description").value;
         const dueDate = document.getElementById("due-date").value;
         const priority = document.querySelectorAll(".priority").value;
+        const objectArray = SidebarController.arrayProjects;
+        const header = document.querySelector(".heading");
 
         // create object
         // select object and append this object, once done get project tasks and append
         const task = new Task(title, description, dueDate, priority);
-    }
+
+        // Get matching object
+        objectArray.forEach(object => {
+            if (header.id === object.name) {
+                object.tasks.push(task);
+                Content.createTask(title, description, dueDate, priority);
+            };
+        });
+    };
 
     static addTaskListener() {
         // select elements
@@ -55,7 +64,9 @@ export class ContentController {
         const modal = document.getElementById("modal");
 
         // add event listener for modal
-        addTaskBtn.addEventListener("click", () => modal.showModal());
+        addTaskBtn.addEventListener("click", () => {
+            modal.showModal();
+        });
         ContentController.confirmBtn(modal);
     }
 
@@ -64,7 +75,9 @@ export class ContentController {
         const confirm = document.getElementById("confirm");
 
         // add event listener and call
-        confirm.addEventListener("click", (e) => {
+        confirm.replaceWith(confirm.cloneNode(true));
+        const newConfirm = document.getElementById("confirm");
+        newConfirm.addEventListener("click", (e) => {
             e.preventDefault();
             ContentController.appendTask();
             modal.close();
