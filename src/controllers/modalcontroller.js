@@ -16,6 +16,5 @@ export class ModalController {
             ContentController.appendTask()
             ModalController.modal.close();
         }
-
     }
 }

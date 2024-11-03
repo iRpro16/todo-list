@@ -141,6 +141,10 @@ body {
     padding: 5px;
 }
 
+.add-task:hover {
+    cursor: pointer;
+}
+
 .tasks-div {
     display: flex;
     flex-direction: column;
@@ -152,6 +156,8 @@ body {
 .task {
     display: flex;
     align-items: center;
+    border-bottom: 2px solid lightgray;
+    padding: 10px;
 }
 
 .elements-div {
@@ -205,6 +211,25 @@ form > div > input {
     color: white;
     width: 40%;
     align-self: flex-end;
+}
+
+/* Tasks */
+
+.star-icon {
+    align-self: flex-end;
+}
+
+.right-side {
+    display: flex;
+    flex-direction: column;
+}
+
+.right-side > p {
+    font-weight: 700;
+}
+
+.task:hover {
+    box-shadow: none;
 }
 
 

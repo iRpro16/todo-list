@@ -87,6 +87,7 @@ export class Content {
         // task div
         const taskCont = document.createElement("div");
         taskCont.classList.add('task');
+        taskCont.id = title;
 
         // checkbox 
         const checkbox = document.createElement("input");
@@ -107,22 +108,35 @@ export class Content {
         // right side
         const rightTask = document.createElement("div");
         rightTask.classList.add("right-side");
-        
-        // svg 
+
+        // append all
         if (taskPriority === "yes") {
             // svg
             const starSvg = document.createElement("img");
             starSvg.src = starIcon;
             starSvg.classList.add('star-icon');
             starSvg.style.width = "25px";
-            rightTask.append(starSvg);
-        }
-        rightTask.append(taskDue);
-        // append
-        elementsDiv.append(leftTask, rightTask);
 
-        // append all
-        taskCont.append(elementsDiv);
-        tasksList.append(taskCont);
+            // right task appending
+            rightTask.append(starSvg, taskDue);
+
+            // elements appending
+            elementsDiv.append(leftTask, rightTask);
+
+            // append before
+            taskCont.append(elementsDiv);
+            tasksList.insertBefore(taskCont, tasksList.firstChild);
+
+        } else {
+            // right task
+            rightTask.append(taskDue);
+
+            // append left and right
+            elementsDiv.append(leftTask, rightTask);
+
+            // simply append
+            taskCont.append(elementsDiv)
+            tasksList.append(taskCont);
+        }
     }
 }

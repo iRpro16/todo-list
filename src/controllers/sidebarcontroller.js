@@ -28,7 +28,7 @@ export class SidebarController {
                 // create object
                 SidebarController.createObject(projectName.value);
 
-                // add prohect to DOM
+                // add project to DOM
                 Sidebar.addProject(projectName.value);
 
                 // clear

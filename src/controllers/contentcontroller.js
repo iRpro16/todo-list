@@ -26,8 +26,16 @@ export class ContentController {
         }
 
         // delete if checked
-        if (e.target.classList.contains("checkbox")) {
+        if (e.target.checked) {
+            // get queries
+            const tasksDiv = document.querySelector(".tasks-div");
+            const taskTitle = e.target.closest(".task").id;
 
+            // remove the project from DOM
+            tasksDiv.removeChild(e.target.closest(".task"));
+
+            // delete from object
+            ContentController.deleteTask(taskTitle);
         }
     }
 
@@ -55,6 +63,14 @@ export class ContentController {
 
     // delete task
     static deleteTask(taskTitle) {
-
+        SidebarController.arrayProjects.forEach(project => {
+            // for loop to iterate each task in tasks array
+            for (let i = 0; i < project.tasks.length; i++) {
+                if (taskTitle === project.tasks[i].title) {
+                    let index = project.tasks.indexOf(project.tasks[i]);
+                    project.tasks.splice(index, 1);
+                }
+            }
+        })
     }
 }
