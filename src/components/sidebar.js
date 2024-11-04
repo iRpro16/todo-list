@@ -43,7 +43,7 @@ export class Sidebar {
     };
 
     static addProject(projectName) {
-        // everytime this function is called, create element and append to sidebar\
+        // everytime this function is called, create element and append to sidebar
         // create project div
         const projectDiv = document.createElement("div");
         projectDiv.classList.add("project");

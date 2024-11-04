@@ -4,6 +4,7 @@ import { Content } from "./components/content";
 import { SidebarController } from "./controllers/sidebarcontroller";
 import { ContentController } from "./controllers/contentcontroller";
 import { ModalController } from "./controllers/modalcontroller";
+import { DeleteController } from "./controllers/deletecontroller";
 
 const loadPage = (function() {
     // load the page
@@ -14,5 +15,4 @@ const loadPage = (function() {
     SidebarController.init();
     ContentController.init();
     ModalController.init();
-
 })()
