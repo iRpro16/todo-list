@@ -4,6 +4,7 @@ export class Sidebar {
     static loadSidebar() {
         // fetch sidebar and append elements to sidebar
         const sidebar = document.querySelector('.sidebar');
+
         // header
         const projectHeader = document.createElement("h3");
         projectHeader.classList.add('header');
@@ -16,6 +17,7 @@ export class Sidebar {
         // form
         const nameForm = document.createElement("form");
         nameForm.classList.add("projects-form");
+
         // prevent page refresh on submit
         nameForm.setAttribute("onSubmit", "return false");
 
@@ -41,8 +43,7 @@ export class Sidebar {
         sidebar.append(projectHeader, inputDiv);
         sidebar.appendChild(projectsCont);
 
-        // if object array not empty
-        // fetch array
+        // if object array not empty, fetch array
         const arrayProjects = SidebarController.arrayProjects;
 
         if (arrayProjects.length > 0) {
@@ -52,8 +53,8 @@ export class Sidebar {
         }
     };
 
+    // each time function is called, create element and append to sidebar
     static addProject(projectName) {
-        // everytime this function is called, create element and append to sidebar
         // create project div
         const projectDiv = document.createElement("div");
         projectDiv.classList.add("project");
@@ -66,6 +67,7 @@ export class Sidebar {
         // create title and svg
         const projectTitle = document.createElement("p");
         projectTitle.textContent = projectName;
+        
         // svg
         const deleteSvg = document.createElement("img");
         deleteSvg.src = deleteIcon;

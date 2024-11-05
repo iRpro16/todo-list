@@ -7,13 +7,25 @@ import { ModalController } from "./controllers/modalcontroller";
 import { DeleteController } from "./controllers/deletecontroller";
 
 const loadPage = (function() {
-    // load the page
-    Sidebar.loadSidebar();
-    Content.loadContent();
+    // load
+    const load = () => {
+        Sidebar.loadSidebar();
+        Content.loadContent();
+    }
 
     // initialize event listeners
-    SidebarController.init();
-    ContentController.init();
-    ModalController.init();
-    DeleteController.init();
+    const init = () => {
+        SidebarController.init();
+        ContentController.init();
+        ModalController.init();
+        DeleteController.init();
+    }
+
+    // return methods
+    return {load, init};
 })()
+
+
+// Usage
+loadPage.load();
+loadPage.init();

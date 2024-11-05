@@ -1,7 +1,7 @@
 import { Sidebar } from "../components/sidebar";
 import { Content } from "../components/content";
 import { DeleteController } from "./deletecontroller";
-import { save, load } from "../utils/storage";
+import { save } from "../utils/storage";
 
 export class Project {
     constructor(name, tasks){
@@ -13,10 +13,10 @@ export class SidebarController {
     // array of projects
     static arrayProjects = JSON.parse(localStorage.getItem("objectArray") || "[]");
 
-    // get id
+    // get project
     static project = null;
 
-    // initialize event listner
+    // initialize event listener
     static init() {
         const sidebar = document.querySelector(".sidebar");
         sidebar.addEventListener("click", SidebarController.handleSidebarClick);
@@ -63,9 +63,9 @@ export class SidebarController {
 
         // push
         const newProject = new Project(name, []);
-        SidebarController.arrayProjects.push(newProject);
+        arrayProjects.push(newProject);
 
-        // save array
+        // save object array
         save("objectArray", arrayProjects);
     }
 
@@ -77,7 +77,7 @@ export class SidebarController {
 
     // fetch objectId and iterate through array
     static appendProject(projectId) {
-        const arrayProjects = load("objectArray");
+        const arrayProjects = SidebarController.arrayProjects;
         arrayProjects.forEach(project => {
             if (project.name === projectId) {
                 Content.createContent(project);
@@ -97,7 +97,7 @@ export class SidebarController {
                 arrayProjects.splice(index, 1);
             }
         });
-        // save array
+        // save object array
         save("objectArray", arrayProjects);
     }
 

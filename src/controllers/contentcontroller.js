@@ -60,6 +60,7 @@ export class ContentController {
                 Content.createTask(title, description, dueDate, priority);
             };
         });
+        // save objectArray
         save("objectArray", arrayProjects);
     };
 
@@ -74,7 +75,8 @@ export class ContentController {
                     project.tasks.splice(index, 1);
                 }
             }
-        })
+        });
+        // save objectArray
         save("objectArray", arrayProjects);
     }
 }
