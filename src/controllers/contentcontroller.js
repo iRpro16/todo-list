@@ -1,6 +1,8 @@
 import { SidebarController } from "./sidebarcontroller";
 import { Content } from "../components/content";
 import { ModalController } from "./modalcontroller";
+import { save } from "../utils/storage";
+
 class Task {
     constructor(title, description, dueDate, priority) {
         this.title = title;
@@ -11,7 +13,6 @@ class Task {
 }
 
 export class ContentController {
-
     // initialize listeners
     static init() {
         const content = document.querySelector(".content");
@@ -47,23 +48,25 @@ export class ContentController {
         const dueDate = document.getElementById("due-date").value;
         const priority = document.querySelector("input[name = priority]:checked").value;
         const header = document.querySelector(".heading");
+        const arrayProjects = SidebarController.arrayProjects;
 
         // create object
-        // select object and append this object, once done get project tasks and append
         const task = new Task(title, description, dueDate, priority);
 
-        // Get matching object
-        SidebarController.arrayProjects.forEach(object => {
+        // get matching object
+        arrayProjects.forEach(object => {
             if (header.id === object.name) {
                 object.tasks.push(task);
                 Content.createTask(title, description, dueDate, priority);
             };
         });
+        save("objectArray", arrayProjects);
     };
 
     // delete task
     static deleteTask(taskTitle) {
-        SidebarController.arrayProjects.forEach(project => {
+        const arrayProjects = SidebarController.arrayProjects;
+        arrayProjects.forEach(project => {
             // for loop to iterate each task in tasks array
             for (let i = 0; i < project.tasks.length; i++) {
                 if (taskTitle === project.tasks[i].title) {
@@ -72,5 +75,6 @@ export class ContentController {
                 }
             }
         })
+        save("objectArray", arrayProjects);
     }
 }

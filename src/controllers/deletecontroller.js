@@ -1,5 +1,6 @@
 import { SidebarController } from "./sidebarcontroller";
 import { Content } from "../components/content";
+import { save, load } from "../utils/storage";
 export class DeleteController {
     static twoStep = document.getElementById("two-step");
 

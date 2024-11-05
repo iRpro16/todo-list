@@ -4,7 +4,6 @@ export class Sidebar {
     static loadSidebar() {
         // fetch sidebar and append elements to sidebar
         const sidebar = document.querySelector('.sidebar');
-
         // header
         const projectHeader = document.createElement("h3");
         projectHeader.classList.add('header');
@@ -43,9 +42,12 @@ export class Sidebar {
         sidebar.appendChild(projectsCont);
 
         // if object array not empty
-        if (SidebarController.arrayProjects.length > 0) {
-            SidebarController.arrayProjects.forEach(project => {
-                sidebar.addProject(project.name);
+        // fetch array
+        const arrayProjects = SidebarController.arrayProjects;
+
+        if (arrayProjects.length > 0) {
+            arrayProjects.forEach(project => {
+                Sidebar.addProject(project.name);
             })
         }
     };
@@ -78,4 +80,3 @@ export class Sidebar {
         getProjectsCont.appendChild(projectDiv);
     };
 };
-

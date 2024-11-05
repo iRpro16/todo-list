@@ -10,6 +10,9 @@ export class Content {
         // select projects container
         const projectsCont = document.querySelector(".projects-cont");
 
+        // load object
+        const arrayProjects = SidebarController.arrayProjects;
+
         // create central div
         const projectCont = document.createElement("div");
         projectCont.classList.add("project-cont");
@@ -19,7 +22,7 @@ export class Content {
 
         // append first project of projects cont
         if (projectsCont.firstChild) {
-            const firstObject = SidebarController.arrayProjects[0];
+            const firstObject = arrayProjects[0];
             Content.createContent(firstObject);
         };
     };

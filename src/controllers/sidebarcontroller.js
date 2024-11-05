@@ -1,6 +1,7 @@
 import { Sidebar } from "../components/sidebar";
 import { Content } from "../components/content";
 import { DeleteController } from "./deletecontroller";
+import { save, load } from "../utils/storage";
 
 export class Project {
     constructor(name, tasks){
@@ -8,10 +9,9 @@ export class Project {
         this.tasks = tasks;
     };
 }
-
 export class SidebarController {
     // array of projects
-    static arrayProjects = [];
+    static arrayProjects = JSON.parse(localStorage.getItem("objectArray") || "[]");
 
     // get id
     static project = null;
@@ -58,8 +58,15 @@ export class SidebarController {
 
     // create object and push to array
     static createObject(name) {
+        // load object
+        const arrayProjects = SidebarController.arrayProjects;
+
+        // push
         const newProject = new Project(name, []);
         SidebarController.arrayProjects.push(newProject);
+
+        // save array
+        save("objectArray", arrayProjects);
     }
 
     // get and return new input each time function is called
@@ -70,8 +77,8 @@ export class SidebarController {
 
     // fetch objectId and iterate through array
     static appendProject(projectId) {
-        const projectObjects = SidebarController.arrayProjects;
-        projectObjects.forEach(project => {
+        const arrayProjects = load("objectArray");
+        arrayProjects.forEach(project => {
             if (project.name === projectId) {
                 Content.createContent(project);
             }
@@ -90,6 +97,8 @@ export class SidebarController {
                 arrayProjects.splice(index, 1);
             }
         });
+        // save array
+        save("objectArray", arrayProjects);
     }
 
     // get static project
