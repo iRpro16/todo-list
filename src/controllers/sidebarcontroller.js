@@ -13,6 +13,9 @@ export class SidebarController {
     // array of projects
     static arrayProjects = [];
 
+    // get id
+    static project = null;
+
     // initialize event listner
     static init() {
         const sidebar = document.querySelector(".sidebar");
@@ -46,14 +49,10 @@ export class SidebarController {
         // if classlist is delete-icon
         if (e.target.classList.contains("delete-icon")) {
             // get queries
-            const projectId = e.target.closest(".project").id;
-            const projectsCont = document.querySelector(".projects-cont");
+            SidebarController.project = e.target.closest(".project");
 
-            // remove project from DOM
-            projectsCont.removeChild(e.target.closest(".project"));
-
-            // delete project
-            SidebarController.deleteProject(projectId);
+            // open modal
+            DeleteController.twoStep.showModal();
         }
     }
 
@@ -80,7 +79,7 @@ export class SidebarController {
     }
 
     // delete project
-    static deleteProject(projectTitle) {
+    static removeObject(projectTitle) {
         // fetch array for use
         const arrayProjects = SidebarController.arrayProjects;
 
@@ -91,5 +90,11 @@ export class SidebarController {
                 arrayProjects.splice(index, 1);
             }
         });
+    }
+
+    // get static project
+    static getProject() {
+        const project = SidebarController.project;
+        return project;
     }
 }

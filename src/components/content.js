@@ -7,20 +7,21 @@ export class Content {
         // get content
         let content = document.querySelector(".content");
         content.innerHTML = "";
+        // select projects container
         const projectsCont = document.querySelector(".projects-cont");
 
         // create central div
         const projectCont = document.createElement("div");
         projectCont.classList.add("project-cont");
+        projectCont.innerHTML = "";
+        // append projectCont to content
+        content.append(projectCont);
 
         // append first project of projects cont
         if (projectsCont.firstChild) {
-            const firstObjectName = SidebarController.arrayProjects[0].name;
-            const firstProject = document.createElement("h1");
-            firstProject.innerText = firstObjectName;
-            projectCont.append(firstProject);
+            const firstObject = SidebarController.arrayProjects[0];
+            Content.createContent(firstObject);
         };
-        content.append(projectCont);  
     };
 
     static createContent(projectObject) {

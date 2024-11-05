@@ -15,4 +15,5 @@ const loadPage = (function() {
     SidebarController.init();
     ContentController.init();
     ModalController.init();
+    DeleteController.init();
 })()

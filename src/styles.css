@@ -242,8 +242,8 @@ form > div > input {
 #two-step {
     border: none;
     border-radius: 10px;
-    height: 200px;
-    width: 200px;
+    height: 170px;
+    width: 250px;
 }
 
 #two-step > form{
@@ -258,4 +258,18 @@ form > div > input {
     padding: 0;
     margin: 0;
     text-align: center;
+}
+
+#confirm-delete {
+    background-color: royalblue;
+    border: none;
+    padding: 8px;
+    color: white;
+    border-radius: 5px;
+}
+
+#confirm-delete:hover {
+    cursor: pointer;
+    background-color: #3454B4;
+
 }

@@ -1,3 +1,5 @@
+import { SidebarController } from "./sidebarcontroller";
+import { Content } from "../components/content";
 export class DeleteController {
     static twoStep = document.getElementById("two-step");
 
@@ -10,11 +12,33 @@ export class DeleteController {
             // prevent page reload
             e.preventDefault();
 
-            const deleteValue = document.querySelector("input[name = confirm-delete]:checked").value;
-            
+            // get projectsCont and yes/no value
+            const projectsCont = document.querySelector(".projects-cont");
+            const confirmValue = document.querySelector("input[name = confirm-delete]:checked").value;
+            // get clicked project
+            const project = SidebarController.getProject();
+
+            // call deleteProject
+            DeleteController.deleteProject(projectsCont, confirmValue, project);
+
+            // clear content
+            Content.loadContent();
+        }
+    }
+
+    static deleteProject(projectsCont, confirmValue, project) {
+        if (confirmValue === "yes") {
+            // remove project from DOM
+            projectsCont.removeChild(project);
+
+            // delete project from object array
+            SidebarController.removeObject(project.id);
 
             // close modal
             DeleteController.twoStep.close();
+        } else {
+            DeleteController.twoStep.close();
         }
+
     }
 }

@@ -49,6 +49,10 @@ export class Sidebar {
         projectDiv.classList.add("project");
         projectDiv.id = projectName;
 
+        // generate random colors
+        let randomColor = Math.floor(Math.random()*16777215).toString(16);
+        projectDiv.style.borderLeft = `5px solid #${randomColor}`;
+
         // create title and svg
         const projectTitle = document.createElement("p");
         projectTitle.textContent = projectName;
