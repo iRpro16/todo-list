@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticked</title>
+<script defer src="main.js"></script></head>
+<body>
+    <div class="sidebar"></div>
+    <div class="content"></div>
+    <!-- Dialog -->
+     <dialog id="modal">
+        <form>
+            <div>
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title">   
+            </div>
+            <div>
+                <label for="description">Description:</label>
+                <input type="text" id="description" name="description">
+            </div>
+            <div>
+                <label for="due-date">Due:</label>
+                <input type="date" id="due-date" name="due-date">
+            </div>
+            <div>
+                <legend>Priority: </legend>
+                <div>
+                    <input type="radio" name="priority" id="yes" value="yes" class="priority">
+                    <label for="yes">Yes</label>
+                </div>
+                <div>
+                    <input type="radio" name="priority" id="no" value="no" class="priority">
+                    <label for="no">No</label>
+                </div>
+            </div>
+            <button id="confirm" value="default">Confirm</button>
+        </form>
+     </dialog>
+
+     <!-- Two-step -->
+      <dialog id="two-step">
+        <form>
+            <h1>Are you sure?</h1>
+            <div class="confirm-choice">
+                <div>
+                    <input type="radio" name="confirm-delete" id="yes" value="yes">
+                    <label for="confirm-delete">Yes</label>
+                </div>
+                <div>
+                    <input type="radio" name="confirm-delete" id="no" value="no">
+                    <label for="confirm-delete">No</label>
+                </div>
+            </div>
+            <button id="confirm-delete" value="default">Confirm</button>
+        </form>
+      </dialog>
+</body>
+</html>
