@@ -1,3 +1,4 @@
+import { SidebarController } from "../controllers/sidebarcontroller";
 import deleteIcon from "/src/assets/svgs/delete.svg";
 export class Sidebar {
     static loadSidebar() {
@@ -40,6 +41,13 @@ export class Sidebar {
         projectsCont.classList.add("projects-cont");
         sidebar.append(projectHeader, inputDiv);
         sidebar.appendChild(projectsCont);
+
+        // if object array not empty
+        if (SidebarController.arrayProjects.length > 0) {
+            SidebarController.arrayProjects.forEach(project => {
+                sidebar.addProject(project.name);
+            })
+        }
     };
 
     static addProject(projectName) {

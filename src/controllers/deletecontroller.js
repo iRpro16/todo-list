@@ -20,9 +20,6 @@ export class DeleteController {
 
             // call deleteProject
             DeleteController.deleteProject(projectsCont, confirmValue, project);
-
-            // clear content
-            Content.loadContent();
         }
     }
 
@@ -36,9 +33,10 @@ export class DeleteController {
 
             // close modal
             DeleteController.twoStep.close();
+            // clear content
+            Content.loadContent();
         } else {
             DeleteController.twoStep.close();
         }
-
     }
 }
